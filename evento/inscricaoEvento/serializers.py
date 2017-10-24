@@ -22,13 +22,15 @@ class EventoSerializer(serializers.HyperlinkedModelSerializer):
 		fields = '__all__'
 
 class TicketSerializer(serializers.HyperlinkedModelSerializer):
-	nome = EventoSerializer(many=False)
+	evento = EventoSerializer(many=False)
 	class Meta:
 		model = Ticket
 		fields = '__all__'
 
 class InscricaoSerializer(serializers.HyperlinkedModelSerializer):
 	participante = PessoaSerializer(many=False)
+	tickets = TicketSerializer(many=True)
+	evento = EventoSerializer(many=False)
 	class Meta:
 		model = Inscricao
 		fields = '__all__'

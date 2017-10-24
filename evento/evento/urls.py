@@ -25,10 +25,10 @@ from inscricaoEvento.views import TicketViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
-router.register(r'Pessoas', PessoaViewSet)
-router.register(r'Eventos', EventoViewSet)
-router.register(r'Inscricoes', InscricaoViewSet)
-router.register(r'Tickets', TicketViewSet)
+router.register(r'pessoas', PessoaViewSet)
+router.register(r'eventos', EventoViewSet)
+router.register(r'inscricoes', InscricaoViewSet)
+router.register(r'tickets', TicketViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
