@@ -32,22 +32,30 @@ class EventoSerializer(serializers.HyperlinkedModelSerializer):
 		event = Evento.objects.create(**dados)
 		return event
 
-class TicketSerializer(serializers.HyperlinkedModelSerializer):
-	
+class TicketSerializer(serializers.HyperlinkedModelSerializer):	
 	evento = EventoSerializer(many=False)
 	class Meta:
 		model = Ticket
 		fields = '__all__'
-	def create(self, dados):
-		print(dados)
+	def create(self, dados):		
 		evento_data = dados.pop('evento')
 		e = Evento.objects.create(**evento_data)
 		t = Ticket.objects.create(evento = e, **dados)
 		return t
 class InscricaoSerializer(serializers.HyperlinkedModelSerializer):
 	participante = PessoaSerializer(many=False)
-	tickets = TicketSerializer(many=True)
+	tickets = TicketSerializer(many=False)
 	evento = EventoSerializer(many=False)
 	class Meta:
 		model = Inscricao
 		fields = '__all__'
+	def create(self, dados):
+		participante_data = dados.pop('participante')
+		tickets_data = dados.pop('tickets')
+		evento_data = dados.pop('evento')
+		e = Evento.objects.create(**evento_data)
+		t = Ticket.objects.create(evento = e, **dados)
+		p = Pessoa.objects.create(**participante_data)
+		i = Inscricao.objects.create(participante = p, Ticket = t, **dados)
+		return i
+

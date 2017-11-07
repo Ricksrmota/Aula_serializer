@@ -27,6 +27,6 @@ class Ticket(models.Model):
 
 class Inscricao(models.Model):
     participante = models.ForeignKey(Pessoa, related_name="participanteInscrito", null=True, blank=False)
-    evento = models.ForeignKey(Evento, related_name="eventoVinculado", null=True, blank=False)
-    tickets = models.ManyToManyField(Ticket, blank=True, related_name='tickets')
+    #evento = models.ForeignKey(Evento, related_name="eventoVinculado", null=True, blank=False)
+    tickets = models.ForeignKey(Ticket, blank=True, related_name='tickets')
     validacao = models.BooleanField("Situação do pagamento de tickets",default=False)
